@@ -1,4 +1,3 @@
-<!--지금 사용하는 Hexlant Node API는 low API로 파운더스 진행할때만 열려있다.-->
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -81,20 +80,30 @@
           amount : document.getElementById('amount').value,
           totalprice : document.getElementById('totalprice').value
         }
+        console.log(financeList);
         //사용내역 업로드
         putResult(financeList.purpose, financeList.subject, financeList.price, financeList.amount, financeList.totalprice)
-        .then(() => {
+        $("#plus").append(`
+            <ul>
+              <li>사용내역 : ${financeList.purpose}</li>
+              <li>사용물품 : ${financeList.subject}</li>
+              <li>물품가격 : ${financeList.price}</li>
+              <li>물품수량 : ${financeList.amount}</li>
+              <li>총가격 : ${financeList.totalprice}</li>
+            </ul>
+        `);
+        /*then(() => {
           financeContract.methods.userresults().call()
           .then((userresults) => {
             console.log("userresults:", usersesults);
             userResults = userresults;
           });
-        });
+        });*/
       }
       
       //사용내역 업로드
       function putResult(_purpose, _subject, _price, _amount, _totalprice) {
-        return financeContract.methods.putResult(_purpose, _subject, _price, _amount, _totalprice).send({from:'0x210Be48eF00dd36BCd10B5ad14C2652e0Fa11E09'})
+        return financeContract.methods.putResult(_purpose, _subject, _price, _amount, _totalprice).call()
       }
 
       //사용내역 부르기
@@ -113,11 +122,11 @@
     <div id="plus"></div>
     <div>
       <form>
-        <input type="text" placeholder="사용목적" id="purpose">
-        <input type="text" placeholder="사용물품" id="subject">
-        <input type="text" placeholder="물품가격" id="price">
-        <input type="text" placeholder="물품수량" id="amount">
-        <input type="text" placeholder="총가격" id="totalprice">
+        <input type="text" placeholder="사용목적" id="purpose" value="">
+        <input type="text" placeholder="사용물품" id="subject" value="">
+        <input type="text" placeholder="물품가격" id="price" value="">
+        <input type="text" placeholder="물품수량" id="amount" value="">
+        <input type="text" placeholder="총가격" id="totalprice" value="">
       </form>
       <button onclick="plusList()">사용내역 업로드</button>
     </div>

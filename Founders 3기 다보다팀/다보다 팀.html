@@ -2,7 +2,7 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8">
-    <title>Node API 사용법</title>
+    <title>다보다 팀 웹사이트</title>
     <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script language="javascript" type="text/javascript" src="./finance_abi.js"></script>
@@ -19,11 +19,11 @@
       var toAddress = "0x5e0f598651B2973ec781c6AD498A61863e44bba3";
       var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/1fcb2a7f98bd41cd91918a2ed3d7392b"));
 
-      //Contract에 필요한 주소 입력
-      var financeAddress="0xaA0Db0C2025F400d169aE5660139761dAeD9E226";
+      //배포된 Contract 주소 입력
+      var financeAddress="0xa3d2763174ec473bc0ef459f20a3d327b3d67b65";
 
       //financeContract라는 스마트 계약 선언 
-      var financeContract = new web3.eth.Contract(abi, financeAddress);
+      var financeContract = new web3.eth.Contract(finance_abi, financeAddress);
       //var web3;
       //Web3와 통신하는 과정
       window.addEventListener('load', () => {
@@ -33,7 +33,6 @@
           try {
             // Request account access if needed
             window.ethereum.enable();
-            start();
             // Acccounts now exposed
             return web3;
           } catch (error) {
@@ -52,7 +51,6 @@
           provider = new Web3.providers.HttpProvider('http://127.0.0.1:9545');
           web3 = new Web3(provider);
           console.log('No web3 instance injected, using Local web3.');
-          start();
           return web3;
         }
         /*if(typeof web3 !=="undefined"){
@@ -74,18 +72,19 @@
       function plusList() {
         //영수증목록
         const financeList = {
+          from : fromAddress,
+          to : toAddress,
           purpose : document.getElementById('purpose').value,
           subject : document.getElementById('subject').value,
           price : document.getElementById('price').value,
           amount : document.getElementById('amount').value,
           totalprice : document.getElementById('totalprice').value
         }
-        console.log(financeList);
         //사용내역 업로드
-        putResult(financeList.purpose, financeList.subject, financeList.price, financeList.amount, financeList.totalprice)
+        putResult(financeList.purpose, financeList.subject, financeList.price, financeList.amount, financeList.totalprice);
         $("#plus").append(`
             <ul>
-              <li>사용내역 : ${financeList.purpose}</li>
+              <li>사용목적 : ${financeList.purpose}</li>
               <li>사용물품 : ${financeList.subject}</li>
               <li>물품가격 : ${financeList.price}</li>
               <li>물품수량 : ${financeList.amount}</li>
@@ -103,7 +102,7 @@
       
       //사용내역 업로드
       function putResult(_purpose, _subject, _price, _amount, _totalprice) {
-        return financeContract.methods.putResult(_purpose, _subject, _price, _amount, _totalprice).call()
+        return financeContract.methods.putResult(_purpose, _subject, _price, _amount, _totalprice).send({from : fromAddress})
       }
 
       //사용내역 부르기

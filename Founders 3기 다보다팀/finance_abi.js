@@ -1,4 +1,4 @@
-var abi = [{
+var finance_abi = [{
         "anonymous": false,
         "inputs": [{
                 "indexed": false,
@@ -14,21 +14,21 @@ var abi = [{
             },
             {
                 "indexed": false,
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "price",
-                "type": "uint256"
+                "type": "string"
             },
             {
                 "indexed": false,
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "amount",
-                "type": "uint256"
+                "type": "string"
             },
             {
                 "indexed": false,
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "totalprice",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "Newfinance",
@@ -74,19 +74,19 @@ var abi = [{
                 "type": "string"
             },
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "getprice",
-                "type": "uint256"
+                "type": "string"
             },
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "getamount",
-                "type": "uint256"
+                "type": "string"
             },
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "gettotalprice",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "stateMutability": "view",
@@ -115,19 +115,19 @@ var abi = [{
                 "type": "string"
             },
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "_price",
-                "type": "uint256"
+                "type": "string"
             },
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "_amount",
-                "type": "uint256"
+                "type": "string"
             },
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "_totalprice",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "name": "putResult",
@@ -160,19 +160,19 @@ var abi = [{
                 "type": "string"
             },
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "price",
-                "type": "uint256"
+                "type": "string"
             },
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "amount",
-                "type": "uint256"
+                "type": "string"
             },
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "totalprice",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "stateMutability": "view",

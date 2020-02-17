@@ -15,43 +15,50 @@
     </script>
 
     <script language="javascript" type="text/javascript">
-      var fromAddress = "0x210Be48eF00dd36BCd10B5ad14C2652e0Fa11E09";
-      var toAddress = "0x5e0f598651B2973ec781c6AD498A61863e44bba3";
-      var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/1fcb2a7f98bd41cd91918a2ed3d7392b"));
+      var web3;
 
-      //배포된 Contract 주소 입력
-      var financeAddress="0xa3d2763174ec473bc0ef459f20a3d327b3d67b65";
-
-      //financeContract라는 스마트 계약 선언 
-      var financeContract = new web3.eth.Contract(finance_abi, financeAddress);
-      //var web3;
+      /*if (typeof window !== 'undefined') {
+          if(window.web3 !== 'undefined'){
+              const provider = new Web3.providers.HttpProvider(
+                  'https://ropsten.infura.io/v3/1fcb2a7f98bd41cd91918a2ed3d7392b'
+                  );
+              web3 = new Web3(provider);
+              console.log("one");
+          } else{
+              web3 = new Web3(window.web3.currentProvider);
+              console.log("two");
+          }
+      } else {
+          const provider = new Web3.providers.HttpProvider(
+              'https://ropsten.infura.io/v3/1fcb2a7f98bd41cd91918a2ed3d7392b'
+              );
+          web3 = new Web3(provider);
+          console.log("three");
+      }*/
       //Web3와 통신하는 과정
-      window.addEventListener('load', () => {
+      window.addEventListener('load', async () => {
       // Wait for loading completion to avoid race conditions with web3 injection timing.
         if (window.ethereum) {
-          web3 = new Web3(window.ethereum);
+          window.web3 = new Web(ethereum);
           try {
             // Request account access if needed
-            window.ethereum.enable();
+            await window.ethereum.enable();
             // Acccounts now exposed
-            return web3;
           } catch (error) {
             console.error(error);
           }
         }
+
         // Legacy dapp browsers...
         else if (window.web3) {
           // Use Mist/MetaMask's provider.
-          web3 = window.web3;
           console.log('Injected web3 detected.');
-          return web3;
+          return window.web3 = new Web3(web3.currentProvider);
         }
         // Fallback to localhost; use dev console port by default...
         else {
-          provider = new Web3.providers.HttpProvider('http://127.0.0.1:9545');
-          web3 = new Web3(provider);
           console.log('No web3 instance injected, using Local web3.');
-          return web3;
+          return web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/1fcb2a7f98bd41cd91918a2ed3d7392b"));
         }
         /*if(typeof web3 !=="undefined"){
           console.log('Web3 Detected!' + web3.currentProvider.constructor.name);
@@ -59,14 +66,26 @@
           start();
         }*/
       });
-      //const Web3 = require('web3');
-      //var web3 = new Web3(metamask_API);
+      var fromAddress = "0x210Be48eF00dd36BCd10B5ad14C2652e0Fa11E09";
+      var toAddress = "0x5e0f598651B2973ec781c6AD498A61863e44bba3";
+      web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/1fcb2a7f98bd41cd91918a2ed3d7392b"));
+      
+      //배포된 Contract 주소 입력
+      var financeAddress="0xa3d2763174ec473bc0ef459f20a3d327b3d67b65";
 
-      //Solidity를 json파일로 변경한 Abi임
-      //const financeAbi = require('./finance_abi.json');
+      //financeContract라는 스마트 계약 선언 
+      var financeContract = new web3.eth.Contract(finance_abi, financeAddress);
+      //var myContract = web3.eth.Contract(finance_abi);
+      //var financeContract = myContract.at(financeAddress);
 
-      //const financeResult = getResult(number);
-      const checking_button = document.getElementById("checking");
+      let contract, instance;
+      (async () => {
+        await $.getJSON('./finance_abi.js', artifacts =>{
+          contract = TruffleContract(artifacts);
+          contract.setProvider(web3.currentProvider);
+        })
+        instance = await contract.deployed();
+      })
 
       //학생회가 사용내역을 제출하면 업로드 하고 목록도 변경이 될 수 있게 함
       function plusList() {
@@ -102,7 +121,7 @@
       
       //사용내역 업로드
       function putResult(_purpose, _subject, _price, _amount, _totalprice) {
-        return financeContract.methods.putResult(_purpose, _subject, _price, _amount, _totalprice).send({from : fromAddress})
+        return financeContract.methods.putResult(_purpose, _subject, _price, _amount, _totalprice).call({from : fromAddress})
       }
 
       //사용내역 부르기

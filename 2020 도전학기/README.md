@@ -3,7 +3,7 @@
 
 ## [도전학기 수강과목] : 4차산업혁명과 창업비즈니스, 머신러닝과 딥러닝, 블록체인의 기초
 
-### [Solidity] : https://ropsten.etherscan.io/tx/0xc6bb5b3dfb17ce8f33b958e65a0b9235723da8bde9f68d9ae8da81a658914dac
+#### [Etherscan] : https://ropsten.etherscan.io/address/0x02db0f2480c4f766095123f0a0ef4c417715e90e
 
 ### [목적]
     

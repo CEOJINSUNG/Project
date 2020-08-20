@@ -1,0 +1,144 @@
+import Web3 from 'web3';
+
+//web3 선언
+export const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/발급받은 API키'));
+//내계좌들
+export const buyAccount = '자신의 지갑주소';
+export const privateKey1 = Buffer.from('자신의 지갑 PrivateKey', 'hex');
+export const sellerAccount = '0x36053c692885A08D4CF249f7fAe5b657ddAaEbDB';
+
+//내 컨트랙트 선언
+export const BlockLockdata = '0x6080604052600436106100775763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166308551a53811461007c5780632cdcfaec146100ad57806370a08231146101545780637150d8ae14610187578063958f85bd1461019c578063a9059cbb146102a4575b600080fd5b34801561008857600080fd5b506100916102bb565b60408051600160a060020a039092168252519081900360200190f35b60408051602060046024803582810135601f8101859004850286018501909652858552610152958335600160a060020a031695369560449491939091019190819084018382808284375050604080516020601f89358b018035918201839004830284018301909452808352979a999881019791965091820194509250829150840183828082843750949750508435955050506020830135926040013591506102ca9050565b005b34801561016057600080fd5b50610175600160a060020a036004351661034f565b60408051918252519081900360200190f35b34801561019357600080fd5b50610091610361565b3480156101a857600080fd5b506101b1610370565b604051808060200180602001868152602001858152602001848152602001838103835288818151815260200191508051906020019080838360005b838110156102045781810151838201526020016101ec565b50505050905090810190601f1680156102315780820380516001836020036101000a031916815260200191505b50838103825287518152875160209182019189019080838360005b8381101561026457818101518382015260200161024c565b50505050905090810190601f1680156102915780820380516001836020036101000a031916815260200191505b5097505050505050505060405180910390f35b610152600160a060020a036004351660243561037e565b600154600160a060020a031681565b6000805473ffffffffffffffffffffffffffffffffffffffff19163317808255600160a060020a0390811682526007602090815260408084208054889003905591891683529120805485019055855161032991600291908801906103b1565b50835161033d9060039060208701906103b1565b50600492909255600555600655505050565b60076020526000908152604090205481565b600054600160a060020a031681565b606080600080809091929394565b60008054600160a060020a0390811682526007602052604080832080548590039055931681529190912080549091019055565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106103f257805160ff191683800117855561041f565b8280016001018555821561041f579182015b8281111561041f578251825591602001919060010190610404565b5061042b92915061042f565b5090565b61044991905b8082111561042b5760008155600101610435565b905600a165627a7a7230582098f5f32ba9bcfc8d185d1a288f44d9b09d93fe3ae1eb05ee6c82c80c5ad0c9250029'
+export const BlockLockAddress = '0x02Db0f2480c4f766095123F0A0EF4C417715E90e';
+export const BlockLockABI = [
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_seller",
+				"type": "address"
+			},
+			{
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"name": "_phonenumber",
+				"type": "string"
+			},
+			{
+				"name": "_price",
+				"type": "uint256"
+			},
+			{
+				"name": "_startTime",
+				"type": "uint256"
+			},
+			{
+				"name": "_endTime",
+				"type": "uint256"
+			}
+		],
+		"name": "purchase",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_seller",
+				"type": "address"
+			},
+			{
+				"name": "_money",
+				"type": "uint256"
+			}
+		],
+		"name": "transfer",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "buyer",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getContract",
+		"outputs": [
+			{
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"name": "_phonenumber",
+				"type": "string"
+			},
+			{
+				"name": "_price",
+				"type": "uint256"
+			},
+			{
+				"name": "_startTime",
+				"type": "uint256"
+			},
+			{
+				"name": "_endTime",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "seller",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+export const myContract = new web3.eth.Contract(BlockLockABI, BlockLockAddress);

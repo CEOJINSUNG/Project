@@ -3,7 +3,7 @@
 
 ## [도전학기 수강과목] : 4차산업혁명과 창업비즈니스, 머신러닝과 딥러닝, 블록체인의 기초
 
-#### [Etherscan] : https://ropsten.etherscan.io/address/0x02db0f2480c4f766095123f0a0ef4c417715e90e
+#### [Etherscan] : https://ropsten.etherscan.io/address/0x02db0f2480c4f766095123f0a0ef4c417715e90e <- 현재 Contract 주소
 
 #### BlockLock 아이디어
 

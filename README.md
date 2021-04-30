@@ -1,6 +1,8 @@
 # Project
 프로젝트 관련 자료들을 모아놓는 공간입니다.
 
+#### 참고 자료 : https://www.notion.so/IT-A-to-Z-By-1e1fbc981b7c4c03ac44943085ac8304
+
 1. 3DIM(3D Printer Idea Maker)
 
 - 아두이노와 3D Printer 그리고 어플을 활용해 Smart Window라는 제품을 만들었습니다(zip 파일로 존재).
